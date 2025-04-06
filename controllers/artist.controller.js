@@ -11,6 +11,9 @@ exports.findAllArtists = (req, res) => {
   let condition = {};
   
   if (search) {
+
+
+
     condition.$or = [
       { first_name: { $regex: new RegExp(search, 'i') } },
       { last_name: { $regex: new RegExp(search, 'i') } }
@@ -22,6 +25,8 @@ exports.findAllArtists = (req, res) => {
     if (firstName) condition.first_name = { $regex: new RegExp(firstName, 'i') };
     if (lastName) condition.last_name = { $regex: new RegExp(lastName, 'i') };
   }
+
+  
 
   Promise.all([
     Artist.find(condition).skip(skip).limit(limit),
